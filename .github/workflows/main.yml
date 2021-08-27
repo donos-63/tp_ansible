@@ -30,8 +30,7 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_API_NAME}}
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
       - run: |
-          python -m pip install -r requirements.txt
-          export FLASK_APP=hello
-          flask run
+          heroku run export FLASK_APP=hello
+          heroku run flask run
           
 
