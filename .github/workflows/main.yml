@@ -8,14 +8,25 @@ on:
       - master # Changing the branch here would also work
 
 jobs:
-  build:
+  test-conn:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "stormy-gorge-95706"
-          heroku_email: "mathieu.simon63@gmail.com"
+          heroku_app_name: ${{secrets.HEROKU_API_NAME}}
+          heroku_email: ${{secrets.HEROKU_API_EMAIL}}
           justlogin: true
       - run: heroku auth:whoami
+      
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_API_NAME}}
+          heroku_email: ${{secrets.HEROKU_API_EMAIL}}
+
