@@ -31,6 +31,6 @@ jobs:
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
       - run: |
           heroku run export FLASK_APP=hello
-          heroku run flask run
+          heroku run gunicorn --bind 0.0.0.0:5000 wsgi:app
           
 
